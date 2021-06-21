@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="UR3e_RG2_ER5" >
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="UR3e_RGB_CONVEYOR" >
 
 
    <!-- robot name parameter -->
@@ -36,8 +36,8 @@
      safety_pos_margin="$(arg safety_pos_margin)"
      safety_k_position="$(arg safety_k_position)"
      use_fake_hardware="$(arg use_fake_hardware)"
-     fake_sensor_commands="$(arg fake_sensor_commands)"
-     controllers_file="$(arg controllers_file)" />
+     fake_sensor_commands="$(arg fake_sensor_commands)"/>
+<!-- TODO Uncomment when gazebo changes merged     controllers_file="$(arg controllers_file)" /-->
 
 
    <xacro:include filename="$(find conveyor_belt)/model/conveyor_belt/conveyor.urdf"/>
@@ -61,7 +61,7 @@
   </joint>
        
   <joint name="ur_to_gripper" type="fixed">
-    <origin xyz="0 0 0.0" rpy="-1.57075 0 -1.57075"/>
+    <origin xyz="0 0 0.0" rpy="0 0 0"/>
     <parent link="$(arg prefix)tool0"/>
     <child link="quick_change_robot_side"/>
   </joint>
