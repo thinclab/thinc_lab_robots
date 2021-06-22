@@ -45,26 +45,53 @@
 
   <link name="world" />
   
+  <link name="support_pillar">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="10.0"/>
+        <inertia ixx="0.38299" ixy="0" ixz="0" iyy="31.09613" iyz="0" izz="31.47895"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1778 0.1778 1.24458"/>
+        </geometry>
+        <material name="5,5,5"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1778 0.1778 1.24458"/>
+        </geometry>
+      </collision>
+  </link>
+  
   <!-- fix the ur robot in place -->
-  <joint name="world_to_base" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.75 1.1"/>
+  <joint name="world_to_pillar" type="fixed">
+    <origin xyz="-0.5 0 0.62229" rpy="0 0 0"/>
     <parent link="world"/>
+    <child link="support_pillar"/>
+  </joint>
+
+  <joint name="pillar_to_base" type="fixed">
+    <origin xyz="0 0 0.62229" rpy="0 0 0"/>
+    <parent link="support_pillar"/>
     <child link="$(arg prefix)base_link"/>
   </joint>
       
-      
-  <!-- fix the conveyor belt in place -->
-  <joint name="joint_belt" type="fixed">
-    <origin xyz="0 0.3048 1.126" rpy="0 0 0"/>
-    <parent link="world"/>
-    <child link="link_belt"/>
-  </joint>
-       
   <joint name="ur_to_gripper" type="fixed">
     <origin xyz="0 0 0.0" rpy="0 0 0"/>
     <parent link="$(arg prefix)tool0"/>
     <child link="quick_change_robot_side"/>
   </joint>
+
+  <!-- fix the conveyor belt in place -->
+  
+    <joint name="world_to_conveyor_base" type="fixed">
+      <origin xyz="0 0.33893 1.24458" rpy="0 0 0"/>
+      <parent link="world"/>
+      <child link="conveyor_base"/>
+    </joint>
 
 
 </robot>
